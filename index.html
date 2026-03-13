@@ -5,549 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Chủ - Nhà Xe Hải Hà</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
     <style>
-        :root {
-            --primary-color: #B71C1C;
-            --secondary-color: #f39c12;
-            --text-color: #333;
-            --white: #ffffff;
-            --bg-light: #f4f6f9;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
-
-        /* --- PRELOADER --- */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--white);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            transition: opacity 0.5s ease-out;
-        }
-
-        .loader {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
-        }
-
-        .loader-text {
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-
-        /* --- HEADER --- */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            animation: slideDown 0.8s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-
-        .top-bar {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 8px 0;
-            font-size: 0.9rem;
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-        }
-
-        /* Hiệu ứng Logo quét sáng (Shimmer) */
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Tạo luồng sáng chạy qua logo */
-        .logo::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
-            transform: skewX(-25deg);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            20% { left: 100%; }
-            100% { left: 100%; }
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a:hover { color: var(--primary-color); }
-
-        .hotline-btn {
-            background: linear-gradient(45deg, var(--secondary-color), #d35400);
-            color: var(--white);
-            padding: 10px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
-            transition: transform 0.3s ease;
-        }
-
-        .hotline-btn:hover { transform: scale(1.05); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            margin-top: 80px; 
-            height: 600px;
-            position: relative; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-            padding: 20px;
-            overflow: hidden; 
-            background-color: #222;
-        }
-
-        .hero-slideshow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .slide-item {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0;
-            transform: scale(1);
-            transition: opacity 1s ease-in-out, transform 6s linear; 
-        }
-
-        .slide-item.active {
-            opacity: 1; 
-            transform: scale(1.1); 
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
-            z-index: 1; 
-        }
-
-        .hero h1, .search-box { position: relative; z-index: 2; }
-
-        /* Animation mới cho H1: Tracking In + Gradient Text */
-        @keyframes trackingInExpand {
-            0% {
-                letter-spacing: -0.5em;
-                opacity: 0;
-            }
-            40% {
-                opacity: 0.6;
-            }
-            100% {
-                opacity: 1;
-                letter-spacing: normal;
-            }
-        }
-        
-        /* Hiệu ứng chữ ánh kim chảy */
-        @keyframes textFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero h1 {
-            font-size: 3.5rem; /* To hơn chút */
-            margin-bottom: 30px;
-            font-weight: 900;
-            text-transform: uppercase;
-            
-            /* Tạo màu Gradient cho chữ (Hiệu ứng chữ vàng kim) */
-            background: linear-gradient(to right, #ffffff 20%, #f1c40f 40%, #f1c40f 60%, #ffffff 80%);
-            background-size: 200% auto;
-            color: #fff;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            text-shadow: 0 0 20px rgba(0,0,0,0.5); /* Bóng đổ nhẹ đằng sau để nổi bật trên nền */
-            
-            /* Kết hợp 2 animation: Xuất hiện và Chảy màu */
-            animation: trackingInExpand 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both,
-                       textFlow 3s linear infinite;
-        }
-
-        /* --- SEARCH BOX --- */
-        /* Animation nổi lên từ dưới */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .search-box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            border-radius: 12px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-            max-width: 950px;
-            width: 100%;
-            color: var(--text-color);
-            backdrop-filter: blur(5px);
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 1.2s forwards; /* Chạy sau H1 */
-        }
-
-        .input-group {
-            flex: 1;
-            min-width: 200px;
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
-
-        .input-group label {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .input-group input, .input-group select {
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .input-group input:focus, .input-group select:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.2);
-        }
-
-        .search-btn {
-            background: linear-gradient(45deg, var(--secondary-color), #e67e22);
-            color: var(--white);
-            border: none;
-            padding: 0 40px;
-            border-radius: 6px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: auto; 
-            height: 48px; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(243, 156, 18, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
-        }
-
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
-        }
-
-        /* --- ROUTES LIST --- */
-        .container {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-
-        /* Animation cho Tiêu đề Section: Focus Blur (Mờ -> Rõ) */
-        @keyframes textFocusIn {
-            0% {
-                filter: blur(12px);
-                opacity: 0;
-            }
-            100% {
-                filter: blur(0px);
-                opacity: 1;
-            }
-        }
-
-        .section-title {
-            text-align: center; 
-            margin-bottom: 40px;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            font-size: 2rem;
-            font-weight: 800; 
-            position: relative;
-            
-            opacity: 0;
-            animation: textFocusIn 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) 1.5s forwards; /* Delay 1.5s */
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 0px; /* Bắt đầu từ 0 */
-            height: 4px;
-            background: var(--secondary-color);
-            margin: 15px auto 0; 
-            border-radius: 2px;
-            /* Animation gạch chân chạy ra 2 bên */
-            animation: expandWidth 0.8s ease-out 2s forwards;
-        }
-
-        @keyframes expandWidth {
-            to { width: 80px; }
-        }
-
+        /* Mặc định (PC/Laptop): Luôn ép thành 3 cột bằng nhau */
         .route-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .route-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.4s ease;
-            border: 1px solid transparent;
-            position: relative;
-            top: 0;
-            opacity: 0; 
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .route-card:nth-child(1) { animation-delay: 1.8s; }
-        .route-card:nth-child(2) { animation-delay: 2.0s; }
-        .route-card:nth-child(3) { animation-delay: 2.2s; }
-
-        .route-card:hover {
-            top: -10px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            border-color: rgba(183, 28, 28, 0.2);
-        }
-
-        .card-header {
-            background: linear-gradient(to right, var(--primary-color), #8f1515);
-            color: white;
-            padding: 15px 20px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.1rem;
-        }
-
-        .card-body { padding: 25px; }
-
-        .route-info {
-            margin-bottom: 12px;
-            font-size: 1rem;
-            color: #555;
-            display: flex;
-            align-items: center;
-        }
-
-        .route-info i {
-            width: 30px;
-            color: var(--primary-color);
-            font-size: 1.1rem;
-        }
-
-        .price {
-            font-size: 1.4rem;
-            color: var(--primary-color);
-            font-weight: 800;
-            margin-top: 20px;
-            display: block;
-        }
-
-        .book-btn {
-            display: block;
+            grid-template-columns: repeat(3, 1fr); /* Quan trọng: Số 3 nghĩa là 3 cột */
+            gap: 30px;                             /* Khoảng cách giữa các thẻ */
             width: 100%;
-            padding: 12px;
-            background-color: var(--white);
-            color: var(--primary-color);
-            text-align: center;
-            text-decoration: none;
-            margin-top: 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            border: 2px solid var(--primary-color);
-            transition: all 0.3s;
-            text-transform: uppercase;
         }
 
-        .book-btn:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-            box-shadow: 0 5px 15px rgba(183, 28, 28, 0.3);
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background-color: #1a1a1a;
-            color: #ccc;
-            padding: 60px 0 20px;
-            margin-top: 80px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .footer-col h3 {
-            color: var(--white);
-            margin-bottom: 25px;
-            font-size: 1.2rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-col h3::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--secondary-color);
-        }
-
-        .footer-col p { line-height: 1.6; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 12px; }
-        
-        .footer-col ul li a {
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-col ul li a:hover {
-            color: var(--secondary-color) !important;
-            padding-left: 5px;
-        }
-
-        .footer-col i {
-            margin-right: 10px;
-            color: var(--secondary-color);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            margin-top: 50px;
-            font-size: 0.9rem;
-            color: #777;
+        /* Giao diện Mobile/Tablet (Màn hình nhỏ hơn 900px) */
+        @media (max-width: 900px) {
+            .route-grid {
+                grid-template-columns: 1fr; /* Chuyển thành 1 cột dọc duy nhất */
+                gap: 20px;
+            }
+            
+            /* Tinh chỉnh thẻ card trên mobile cho gọn hơn */
+            .route-card {
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -559,19 +38,17 @@
     </div>
 
     <header>
-        <div class="top-bar">
-            Hệ thống đặt vé xe Limousine cao cấp - Phục vụ 24/7
-        </div>
+        <div class="top-bar">Hệ thống đặt vé xe Limousine cao cấp - Phục vụ 24/7</div>
         <div class="nav-container">
-            <a href="#" class="logo"><i class="fas fa-bus"></i> HẢI HÀ LIMOUSINE</a>
+            <a href="index.html" class="logo"><i class="fas fa-bus"></i> HẢI HÀ LIMOUSINE</a>
             <ul class="nav-links">
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Lịch trình</a></li>
+                <li><a href="index.html" class="active">Trang chủ</a></li>
+                <li><a href="lichtrinh.html">Lịch trình</a></li>
                 <li><a href="#">Tra cứu vé</a></li>
                 <li><a href="#">Tin tức</a></li>
-                <li><a href="#">Liên hệ</a></li>
+                <li><a href="lienhe.html">Liên hệ</a></li>
             </ul>
-            <a href="tel:0900000000" class="hotline-btn"><i class="fas fa-phone-alt"></i> 0905.619.619</a>
+            <a href="tel:0905619619" class="hotline-btn"><i class="fas fa-phone-alt"></i> 0905.619.619</a>
         </div>
     </header>
 
@@ -580,45 +57,53 @@
             <div class="slide-item active" style="background-image: url('avata1.jpg');"></div>
             <div class="slide-item" style="background-image: url('avata2.jpg');"></div>
             <div class="slide-item" style="background-image: url('avata3.jpg');"></div>
-            <div class="slide-item" style="background-image: url('avata4.jpg');"></div>
-            <div class="slide-item" style="background-image: url('avata5.jpg');"></div>
-            <div class="slide-item" style="background-image: url('avata6.jpg');"></div>
-            <div class="slide-item" style="background-image: url('avata7.jpg');"></div>
-            <div class="slide-item" style="background-image: url('avata8.jpg');"></div>
         </div>
-
         <div class="hero-overlay"></div>
 
         <h1>Bạn muốn đi đâu cùng Hải Hà?</h1>
         
         <div class="search-box">
             <div class="input-group">
-                <label>Nơi đi</label>
+                <label><i class="fas fa-map-marker-alt"></i> Nơi đi</label>
                 <select>
-                    <option>Đồng Hới </option>
+                    <option>Đồng Hới</option>
                     <option>Nhân Trạch</option>
-                    <option>Ba Dốc</option>
-                    <option>Quán Hàu</option>
                     <option>Dinh Mười</option>
-                    <option>Lệ Thủy</option>
+                    <option>Cam Liên</option>
+                    <option>Ngã 3 Sa Lung</option>
+                    <option>Châu Thị</option>
+                    <option>Ngã 3 Hiền Lương</option>
+                    <option>Hồ Xá</option>
+                    <option>Gio Linh</option>
+                    <option>Đông Hà</option>
+                    <option>Thị Xã Quảng Trị</option>
+                    <option>Ngã 3 Long Hưng</option>
                     <option>Đà Nẵng</option>
                 </select>
             </div>
             <div class="input-group">
-                <label>Nơi đến</label>
+                <label><i class="fas fa-location-arrow"></i> Nơi đến</label>
                 <select>
                     <option>Đà Nẵng</option>
-                    <option>Ba Dốc</option>
                     <option>Nhân Trạch</option>
-                    <option>Quang Phú</option>
+                    <option>Dinh Mười</option>
+                    <option>Cam Liên</option>
+                    <option>Ngã 3 Sa Lung</option>
+                    <option>Châu Thị</option>
+                    <option>Ngã 3 Hiền Lương</option>
+                    <option>Hồ Xá</option>
+                    <option>Gio Linh</option>
+                    <option>Đông Hà</option>
+                    <option>Thị Xã Quảng Trị</option>
+                    <option>Ngã 3 Long Hưng</option>
                     <option>Đồng Hới</option>
                 </select>
             </div>
             <div class="input-group">
-                <label>Ngày đi</label>
+                <label><i class="far fa-calendar-alt"></i> Ngày đi</label>
                 <input type="date">
             </div>
-            <button class="search-btn" onclick="window.open('https://vexere.com/vi-VN/xe-hai-ha-limousine/', '_blank')">TÌM CHUYẾN XE</button>
+            <button class="search-btn" onclick="window.location.href='lichtrinh.html'">TÌM CHUYẾN XE</button>
         </div>
     </section>
 
@@ -629,43 +114,46 @@
             
             <div class="route-card">
                 <div class="card-header">
-                    <span>Nhân Trạch - Đà Nẵng</span>
+                    <span>ĐỒNG HỚI - ĐÀ NẴNG</span>
                     <i class="fas fa-bus"></i>
                 </div>
                 <div class="card-body">
-                    <div class="route-info"><i class="fas fa-clock"></i> Thời gian: Dự kiến 6h</div>
-                    <div class="route-info"><i class="fas fa-road"></i> Khoảng cách: ~280km</div>
-                    <div class="route-info"><i class="fas fa-couch"></i> Loại xe: Limousine 24 Cabin</div>
-                    <span class="price">Liên hệ</span>
-                    <a href="https://vexere.com/vi-VN/xe-hai-ha-limousine/" target="_blank" class="book-btn">Đặt vé ngay</a>
+                    <div class="route-info"><i class="fas fa-clock"></i> <strong>Thời gian: </strong> Dự kiến 5 tiếng 30 phút</div>
+                    <div class="route-info"><i class="fas fa-road"></i> <strong>Khoảng cách:</strong> ~270km</div>
+                    <div class="route-info"><i class="fas fa-chair"></i> <strong>Loại xe: </strong> Limousine 24 Cabin</div>
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px dashed #ddd;">
+                    <span class="price">350.000đ</span>
+                    <a href="lichtrinh.html" class="book-btn">ĐẶT VÉ NGAY</a>
                 </div>
             </div>
 
             <div class="route-card">
                 <div class="card-header">
-                    <span>Đồng Hới - Đà Nẵng</span>
+                    <span>NHÂN TRẠCH - ĐÀ NẴNG</span>
                     <i class="fas fa-bus"></i>
                 </div>
                 <div class="card-body">
-                    <div class="route-info"><i class="fas fa-clock"></i> Thời gian: Dự kiến 5h 30p</div>
-                    <div class="route-info"><i class="fas fa-road"></i> Khoảng cách: ~270km</div>
-                    <div class="route-info"><i class="fas fa-couch"></i> Loại xe: Limousine 24 Cabin</div>
-                    <span class="price">Liên hệ</span>
-                    <a href="https://vexere.com/vi-VN/xe-hai-ha-limousine/" target="_blank" class="book-btn">Đặt vé ngay</a>
+                    <div class="route-info"><i class="fas fa-clock"></i> <strong>Thời gian:</strong> Dự kiến 6 tiếng</div>
+                    <div class="route-info"><i class="fas fa-road"></i> <strong>Khoảng cách:</strong> ~280km</div>
+                    <div class="route-info"><i class="fas fa-chair"></i> <strong>Loại xe:</strong> Limousine 24 Cabin</div>
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px dashed #ddd;">
+                    <span class="price">350.000đ</span>
+                    <a href="lichtrinh.html" class="book-btn">ĐẶT VÉ NGAY</a>
                 </div>
             </div>
 
             <div class="route-card">
                 <div class="card-header">
-                    <span>Lệ Thủy - Đà Nẵng</span>
+                    <span>LỆ THỦY - ĐÀ NẴNG</span>
                     <i class="fas fa-bus"></i>
                 </div>
                 <div class="card-body">
-                    <div class="route-info"><i class="fas fa-clock"></i> Thời gian: Dự kiến 4h 30p</div>
-                    <div class="route-info"><i class="fas fa-road"></i> Khoảng cách: ~220km</div>
-                    <div class="route-info"><i class="fas fa-couch"></i> Loại xe: Limousine 24 Cabin</div>
-                    <span class="price">Liên hệ</span>
-                    <a href="https://vexere.com/vi-VN/xe-hai-ha-limousine/" target="_blank" class="book-btn">Đặt vé ngay</a>
+                    <div class="route-info"><i class="fas fa-clock"></i> <strong>Thời gian:</strong> Dự kiến 5 tiếng</div>
+                    <div class="route-info"><i class="fas fa-road"></i> <strong>Thời gian:</strong> ~220km</div>
+                    <div class="route-info"><i class="fas fa-chair"></i> <strong>Loại xe:</strong> Limousine 24 Cabin</div>
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px dashed #ddd;">
+                    <span class="price">300.000đ</span>
+                    <a href="lichtrinh.html" class="book-btn">ĐẶT VÉ NGAY</a>
                 </div>
             </div>
 
@@ -676,10 +164,10 @@
         <div class="footer-content">
             <div class="footer-col">
                 <h3>Về Chúng Tôi</h3>
-                <p>Nhà Xe Hải Hà - Lựa chọn vận tải cao cấp hàng đầu cho hành trình Nhân Trạch – Đồng Hới – Quảng Trị – Huế – Đà Nẵng và ngược lại. Chúng tôi cam kết mang đến những chuyến đi an toàn, chất lượng cao với dòng xe Limousine đời mới nhất.</p>
+                <p>Nhà Xe Hải Hà - Tiên phong trong dịch vụ vận tải hành khách cao cấp tuyến Quảng Bình - Đà Nẵng. Cam kết không bắt khách dọc đường, đưa đón tận nơi.</p>
             </div>
             <div class="footer-col">
-                <h3>Thông Tin Liên Hệ</h3>
+                <h3>Liên Hệ</h3>
                 <ul>
                     <li><i class="fas fa-map-marker-alt"></i> 03 Lê Lợi, Phường Đồng Hới, Tỉnh Quảng Trị</li>
                     <li><i class="fas fa-phone"></i> 0905.619.619</li>
@@ -687,11 +175,10 @@
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>Hỗ Trợ Khách Hàng</h3>
+                <h3>Kết Nối</h3>
                 <ul>
-                    <li><a href="#" style="color:#aaa">Hướng dẫn đặt vé</a></li>
-                    <li><a href="#" style="color:#aaa">Chính sách đổi trả</a></li>
-                    <li><a href="#" style="color:#aaa">Câu hỏi thường gặp</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Fanpage Hải Hà</a></li>
+                    <li><a href="#"><i class="fab fa-zalo"></i> Zalo Official</a></li>
                 </ul>
             </div>
         </div>
@@ -701,21 +188,18 @@
     </footer>
 
     <script>
-        // PRELOADER
+        // Preloader
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             setTimeout(function() {
                 preloader.style.opacity = '0';
-                setTimeout(function() {
-                    preloader.style.display = 'none';
-                }, 500);
+                setTimeout(function() { preloader.style.display = 'none'; }, 500);
             }, 800);
         });
 
-        // SLIDESHOW
+        // Slideshow
         const slides = document.querySelectorAll('.slide-item');
         let currentSlide = 0;
-
         function nextSlide() {
             if (slides.length > 0) {
                 slides[currentSlide].classList.remove('active');
@@ -723,7 +207,6 @@
                 slides[currentSlide].classList.add('active');
             }
         }
-
         setInterval(nextSlide, 5000);
     </script>
 

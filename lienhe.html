@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - Nhà Xe Hải Hà</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="loader"></div>
+        <div class="loader-text">ĐANG TẢI...</div>
+    </div>
+
+    <header>
+        <div class="top-bar">Hệ thống đặt vé xe Limousine cao cấp - Phục vụ 24/7</div>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-bus"></i> HẢI HÀ LIMOUSINE</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="lichtrinh.html">Lịch trình</a></li>
+                <li><a href="#">Tra cứu vé</a></li>
+                <li><a href="#">Tin tức</a></li>
+                <li><a href="lienhe.html" class="active">Liên hệ</a></li>
+            </ul>
+            <a href="tel:0905619619" class="hotline-btn"><i class="fas fa-phone-alt"></i> 0905.619.619</a>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="hero-slideshow">
+            <div class="slide-item active" style="background-image: url('avata1.jpg');"></div>
+            <div class="slide-item" style="background-image: url('avata2.jpg');"></div>
+            <div class="slide-item" style="background-image: url('avata3.jpg');"></div>
+            <div class="slide-item" style="background-image: url('avata4.jpg');"></div>
+            <div class="slide-item" style="background-image: url('avata5.jpg');"></div>
+            <div class="slide-item" style="background-image: url('avata6.jpg');"></div>
+            <div class="slide-item" style="background-image: url('avata7.jpg');"></div>
+            <div class="slide-item" style="background-image: url('avata8.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <h1>Liên Hệ Với Chúng Tôi</h1>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Thông Tin Kết Nối</h2>
+        
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Địa chỉ văn phòng:</strong><br>
+                        03 Lê Lợi, Phường Đồng Hới, Tỉnh Quảng Trị
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt" style="transform: scaleX(-1);"></i>
+                    <div>
+                        <strong>Hotline đặt vé:</strong><br>
+                        <a href="tel:0905619619" style="text-decoration: none; color: inherit;">0905.619.619</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email hỗ trợ:</strong><br>
+                        xehaihaqb@gmail.com
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3780.264663363445!2d106.60298131538356!3d17.46974798802905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31475727773263f7%3A0x6767666495364137!2zMDMgTMOqIEzhu6NpLCDEkOG7k25nIEjhu5tpLCBRdeG6o25nIELDrG5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1645678901234!5m2!1svi!2s" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3 style="margin-bottom: 20px; color: var(--primary-color);">Gửi thắc mắc cho chúng tôi</h3>
+                <form onsubmit="return submitForm(event)">
+                    <div class="input-group">
+                        <label>Họ và tên</label>
+                        <input type="text" placeholder="Nhập họ tên của bạn" required>
+                    </div>
+                    <div class="input-group" style="margin-top: 15px;">
+                        <label>Số điện thoại</label>
+                        <input type="tel" placeholder="Nhập số điện thoại" required>
+                    </div>
+                    <div class="input-group" style="margin-top: 15px;">
+                        <label>Nội dung cần hỗ trợ</label>
+                        <textarea placeholder="Bạn cần hỗ trợ vấn đề gì?" required></textarea>
+                    </div>
+                    <button type="submit" class="search-btn" style="width: 100%; margin-top: 20px;">Gửi Tin Nhắn</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Về Chúng Tôi</h3>
+                <p>Nhà Xe Hải Hà - Lựa chọn vận tải cao cấp hàng đầu cho hành trình Nhân Trạch – Đồng Hới – Quảng Trị – Huế – Đà Nẵng và ngược lại. Chúng tôi cam kết mang đến những chuyến đi an toàn, chất lượng cao với dòng xe Limousine đời mới nhất.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Liên Hệ</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 03 Lê Lợi, Phường Đồng Hới, Tỉnh Quảng Trị</li>
+                    <li><i class="fas fa-phone"></i> 0905.619.619</li>
+                    <li><i class="fas fa-envelope"></i> xehaihaqb@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Hỗ Trợ</h3>
+                <ul>
+                    <li><a href="#">Hướng dẫn đặt vé</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 Bản quyền thuộc về Nhà Xe Hải Hà.
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(function() { preloader.style.opacity = '0'; setTimeout(function() { preloader.style.display = 'none'; }, 500); }, 500);
+        });
+
+        const slides = document.querySelectorAll('.slide-item');
+        let currentSlide = 0;
+        function nextSlide() {
+            if (slides.length > 0) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+        }
+        setInterval(nextSlide, 5000);
+
+        function submitForm(e) {
+            e.preventDefault();
+            alert("Cảm ơn bạn đã liên hệ! Chúng tôi sẽ gọi lại sớm.");
+            e.target.reset();
+            return false;
+        }
+    </script>
+</body>
+</html>
